@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Da Vinci School International — Erbil, Iraq</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --em: #10B981;
+    --em-mid: #059669;
+    --em-light: #34D399;
+    --em-faint: rgba(16,185,129,0.12);
+    --em-glow: rgba(16,185,129,0.25);
+    --bg: #050505;
+    --bg2: #0a0a0a;
+    --bg3: #0f0f0f;
+    --border: rgba(255,255,255,0.08);
+    --border-em: rgba(16,185,129,0.3);
+    --text: #ffffff;
+    --muted: #71717a;
+    --glass: rgba(10,10,10,0.55);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+  a { text-decoration: none; color: inherit; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb { background: #1f1f1f; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--em); }
+  ::selection { background: rgba(16,185,129,0.4); color: #fff; }
+
+  /* utilities */
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+  }
+  .text-em { color: var(--em); }
+  .text-gradient {
+    background: linear-gradient(135deg, #10B981 0%, #34D399 50%, #6EE7B7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section { padding: 6rem 0; border-top: 1px solid var(--border); }
+  .label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--em);
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(16,185,129,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(16,185,129,0.08) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse at center, black 10%, transparent 70%);
+  }
+
+  /* animations */
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @keyframes blink { 0%,60%{opacity:1} 61%,100%{opacity:0} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes pulse-dot { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
+  .float { animation: float 5s ease-in-out infinite; }
+  .fade-up { animation: fadeUp 0.6s ease forwards; }
+
+  /* ===================== NAVBAR ===================== */
+  #navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.5rem 0;
+    transition: all 0.3s ease;
+  }
+  #navbar.scrolled { padding: 0.75rem 0; }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.3s;
+  }
+  #navbar.scrolled .nav-inner {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.5rem 1.5rem;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
+  .nav-logo-text .title { font-family: 'Outfit',sans-serif; font-weight: 800; font-size: 1rem; }
+  .nav-logo-text .sub { font-size: 0.65rem; color: var(--em); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; }
+  .nav-links { display: flex; align-items: center; gap: 2rem; }
+  .nav-links a {
+    font-size: 0.875rem; color: #a1a1aa;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--em);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--em); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    padding: 0.5rem 1.25rem;
+    background: var(--em); color: #000;
+    font-weight: 700; font-size: 0.875rem;
+    border-radius: 999px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--em-light); box-shadow: 0 0 24px var(--em-glow); }
+  .nav-mobile-toggle {
+    display: none; background: none; border: none;
+    color: var(--text); cursor: pointer; padding: 0.5rem;
+  }
+  .nav-mobile-menu {
+    display: none; flex-direction: column; gap: 1rem;
+    margin: 0.5rem 1rem 0;
+    border-radius: 1rem; padding: 1.5rem;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a { color: #a1a1aa; font-size: 0.95rem; }
+  .nav-mobile-menu a:hover { color: var(--em); }
+  .nav-mobile-cta {
+    display: block; text-align: center;
+    padding: 0.6rem 1rem; background: var(--em); color: #000;
+    font-weight: 700; border-radius: 999px;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-mobile-toggle { display: block; }
+  }
+
+  /* ===================== HERO ===================== */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 0 5rem; position: relative; overflow: hidden;
+  }
+  .hero-grid { position: absolute; inset: 0; }
+  .hero-orb-1 {
+    position: absolute; top: -8rem; left: -8rem;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,0.22), transparent 60%);
+    filter: blur(40px); pointer-events: none;
+  }
+  .hero-orb-2 {
+    position: absolute; bottom: -10rem; right: -10rem;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(5,150,105,0.18), transparent 60%);
+    filter: blur(40px); pointer-events: none;
+  }
+  .hero-content {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2.5rem; align-items: center; position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.375rem 1rem; border-radius: 999px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--em);
+    margin-bottom: 2rem;
+  }
+  .hero-h1 {
+    font-family: 'Outfit',sans-serif; font-weight: 900;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 0.95; letter-spacing: -0.03em;
+  }
+  .hero-sub {
+    margin-top: 2rem; font-size: 1.1rem; color: #a1a1aa;
+    max-width: 520px; line-height: 1.7;
+  }
+  .hero-btns { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 1rem 1.75rem;
+    background: var(--em); color: #000;
+    font-weight: 700; border-radius: 999px;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--em-light); box-shadow: 0 0 40px var(--em-glow); }
+  .btn-primary .arrow { display: inline-block; transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 1rem 1.75rem;
+    border: 1px solid var(--border-em); color: var(--text);
+    font-weight: 600; border-radius: 999px;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: rgba(16,185,129,0.1); }
+  .hero-stats {
+    margin-top: 3rem; display: flex; align-items: center; gap: 2rem;
+    font-size: 0.7rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .hero-stats .val { font-size: 1.5rem; font-family: 'Outfit',sans-serif; font-weight: 800; color: var(--text); }
+  .hero-stats .divider { height: 2rem; width: 1px; background: var(--border); }
+  .hero-card {
+    position: relative; width: 100%; max-width: 380px; height: 420px;
+    border-radius: 2rem; padding: 2.5rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    overflow: hidden; margin-left: auto;
+  }
+  .hero-card-orb {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 20%, rgba(16,185,129,0.25), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-card-line {
+    position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--em), transparent);
+  }
+  .hero-card .school-name {
+    margin-top: 2rem; text-align: center;
+    font-family: 'Outfit',sans-serif; font-weight: 900; font-size: 1.75rem;
+  }
+  .hero-card .school-em { color: var(--em); }
+  .hero-card .school-tagline {
+    margin-top: 0.75rem; font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+  }
+
+  /* ===================== ABOUT ===================== */
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: center; }
+  .about-h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.1; }
+  .about-text { color: #a1a1aa; font-size: 1.05rem; line-height: 1.8; }
+  .about-text p + p { margin-top: 1rem; }
+  .about-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2rem; }
+  .about-stat {
+    border-radius: 1rem; padding: 1.25rem;
+    transition: transform 0.2s;
+  }
+  .about-stat:hover { transform: translateY(-4px); }
+  .about-stat .val { font-size: 2rem; font-family: 'Outfit',sans-serif; font-weight: 900; color: var(--em); }
+  .about-stat .lbl { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.2em; margin-top: 0.25rem; }
+  @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+
+  /* ===================== FEATURES ===================== */
+  .features-header { max-width: 640px; margin-bottom: 3.5rem; }
+  .features-h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.1; }
+  .features-sub { margin-top: 1.25rem; color: #a1a1aa; font-size: 1.05rem; }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.25rem;
+  }
+  .feature-card {
+    border-radius: 1.25rem; padding: 1.75rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    min-height: 200px;
+  }
+  .feature-card:hover { transform: translateY(-4px); border-color: var(--border-em) !important; }
+  .feature-card.large { grid-column: span 2; grid-row: span 2; }
+  .feature-hover-orb {
+    position: absolute; top: -2.5rem; right: -2.5rem;
+    width: 10rem; height: 10rem; border-radius: 50%;
+    background: radial-gradient(circle, rgba(16,185,129,0.25), transparent);
+    opacity: 0; transition: opacity 0.3s; pointer-events: none;
+  }
+  .feature-card:hover .feature-hover-orb { opacity: 1; }
+  .feature-icon {
+    width: 2.75rem; height: 2.75rem;
+    border-radius: 0.75rem;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .feature-icon svg { width: 20px; height: 20px; stroke: var(--em); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-card h3 { font-family: 'Outfit',sans-serif; font-weight: 700; font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .feature-card p { font-size: 0.875rem; color: #a1a1aa; line-height: 1.65; }
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .feature-card.large { grid-column: span 2; grid-row: auto; }
+  }
+  @media (max-width: 600px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-card.large { grid-column: span 1; }
+  }
+
+  /* ===================== SUBJECTS ===================== */
+  .subjects-header { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+  .subjects-h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.1; }
+  .subjects-note { color: #a1a1aa; font-size: 0.9rem; max-width: 300px; }
+  .subjects-chips { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .chip {
+    display: inline-block;
+    padding: 0.5rem 1rem; border-radius: 999px;
+    font-size: 0.875rem; color: #a1a1aa;
+    border: 1px solid var(--border);
+    cursor: default; transition: all 0.2s;
+  }
+  .chip:hover { border-color: rgba(16,185,129,0.5); color: var(--em-light); box-shadow: 0 0 20px var(--em-glow); }
+
+  /* ===================== CHAT ===================== */
+  #chat { padding: 6rem 0; border-top: 1px solid var(--border); }
+  .chat-header { text-align: center; margin-bottom: 3rem; }
+  .chat-h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; }
+  .chat-sub { color: #a1a1aa; font-size: 1.05rem; margin-top: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .chat-wrapper {
+    max-width: 900px; margin: 0 auto;
+    border-radius: 1.5rem; overflow: hidden;
+    border: 1px solid var(--border-em);
+    box-shadow: 0 0 60px rgba(16,185,129,0.15);
+  }
+  .chat-wrapper iframe {
+    width: 100%; height: 680px; border: none; display: block;
+    background: var(--bg2);
+  }
+  .chat-note {
+    text-align: center; margin-top: 1.5rem;
+    font-size: 0.8rem; color: var(--muted);
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .chat-note .dot {
+    width: 6px; height: 6px; background: var(--em);
+    border-radius: 50%; display: inline-block;
+    animation: pulse-dot 1.2s infinite ease-in-out;
+  }
+
+  /* ===================== STATS ===================== */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    border-radius: 1.5rem; overflow: hidden;
+    background: var(--border);
+    gap: 1px;
+  }
+  .stat-tile {
+    background: #070707; padding: 2.5rem;
+    transition: background 0.2s;
+  }
+  .stat-tile:hover { background: #0b0b0b; }
+  .stat-val { font-family: 'Outfit',sans-serif; font-weight: 900; font-size: 3.5rem; line-height: 1; background: linear-gradient(135deg, #10B981, #34D399, #6EE7B7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat-lbl { margin-top: 1rem; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); }
+  @media (max-width: 700px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+
+  /* ===================== FOOTER ===================== */
+  footer {
+    padding: 6rem 0 2.5rem; border-top: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  footer::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16,185,129,0.5), transparent);
+  }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr 0.8fr 1fr; gap: 2.5rem; }
+  .footer-brand { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .footer-brand-name { font-family: 'Outfit',sans-serif; font-weight: 800; font-size: 1.3rem; }
+  .footer-brand-sub { font-size: 0.65rem; color: var(--em); letter-spacing: 0.25em; text-transform: uppercase; }
+  .footer-desc { color: #a1a1aa; font-size: 0.875rem; line-height: 1.7; max-width: 280px; }
+  .footer-col-title { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); margin-bottom: 1rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-links a { font-size: 0.875rem; color: #a1a1aa; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--em); }
+  .footer-contact { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-contact li { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: #a1a1aa; }
+  .footer-contact svg { width: 16px; height: 16px; stroke: var(--em); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .footer-contact a { color: #a1a1aa; transition: color 0.2s; }
+  .footer-contact a:hover { color: var(--em); }
+  .footer-bottom {
+    margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    font-size: 0.75rem; color: var(--muted);
+  }
+  .footer-bottom .motto { letter-spacing: 0.2em; text-transform: uppercase; }
+  @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<header id="navbar">
+  <div class="container">
+    <div class="nav-inner" id="navInner">
+      <a href="#hero" class="nav-logo">
+        <svg viewBox="0 0 64 64" width="38" height="38" xmlns="http://www.w3.org/2000/svg" aria-label="Da Vinci School Logo">
+          <defs>
+            <linearGradient id="dvG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#10B981"/>
+              <stop offset="100%" stop-color="#059669"/>
+            </linearGradient>
+          </defs>
+          <polygon points="32,3 58,17 58,47 32,61 6,47 6,17" fill="url(#dvG)" opacity="0.2" stroke="url(#dvG)" stroke-width="1.5"/>
+          <circle cx="32" cy="32" r="17" fill="none" stroke="url(#dvG)" stroke-width="1.2" opacity="0.55"/>
+          <text x="16" y="41" font-family="Outfit, sans-serif" font-weight="800" font-size="22" fill="#10B981">dV</text>
+        </svg>
+        <div class="nav-logo-text">
+          <div class="title">Da Vinci School</div>
+          <div class="sub">Erbil · Iraq</div>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#chat">DaVincieGPT</a>
+        <a href="#contact">Contact</a>
+        <a href="#chat" class="nav-cta">Launch DaVincieGPT</a>
+      </nav>
+      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <svg id="menuIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="glass nav-mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#features" class="mobile-nav-link">Features</a>
+    <a href="#subjects" class="mobile-nav-link">Subjects</a>
+    <a href="#chat" class="mobile-nav-link">DaVincieGPT</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+    <a href="#chat" class="nav-mobile-cta mobile-nav-link">Launch DaVincieGPT</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-grid grid-bg" aria-hidden="true"></div>
+  <div class="hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb-2" aria-hidden="true"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="hero-content">
+      <div class="fade-up">
+        <div class="glass hero-eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+          IB World School · Erbil · Iraq
+        </div>
+        <h1 class="hero-h1">
+          Meet <span class="text-gradient">DaVincieGPT</span><br>
+          <span style="color:rgba(255,255,255,0.9)">Your school's</span> AI tutor.
+        </h1>
+        <p class="hero-sub">
+          Built for Da Vinci School International. Homework help, essay reviews, IB study plans and a curious mind that never sleeps — available 24/7, right in your browser.
+        </p>
+        <div class="hero-btns">
+          <a href="#chat" class="btn-primary">
+            Start chatting now <span class="arrow">→</span>
+          </a>
+          <a href="#about" class="btn-outline">About the school</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="val">24/7</div>Always on</div>
+          <div class="divider"></div>
+          <div><div class="val">IB · MYP · DP</div>Aligned</div>
+          <div class="divider"></div>
+          <div><div class="val">30+</div>Subjects</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="glass float hero-card" style="box-shadow:0 0 30px rgba(16,185,129,0.25),0 0 60px rgba(16,185,129,0.12);">
+          <div class="hero-card-orb" aria-hidden="true"></div>
+          <svg viewBox="0 0 64 64" width="100" height="100" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;">
+            <defs>
+              <linearGradient id="dvG2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#10B981"/>
+                <stop offset="100%" stop-color="#059669"/>
+              </linearGradient>
+            </defs>
+            <polygon points="32,3 58,17 58,47 32,61 6,47 6,17" fill="url(#dvG2)" opacity="0.2" stroke="url(#dvG2)" stroke-width="1.5"/>
+            <circle cx="32" cy="32" r="17" fill="none" stroke="url(#dvG2)" stroke-width="1.2" opacity="0.55"/>
+            <circle cx="32" cy="32" r="10" fill="none" stroke="#10B981" stroke-width="0.6" opacity="0.35"/>
+            <text x="16" y="41" font-family="Outfit, sans-serif" font-weight="800" font-size="22" fill="#10B981">dV</text>
+          </svg>
+          <div class="school-name" style="position:relative;z-index:1;">Da Vinci<br><span class="school-em">School</span></div>
+          <div class="school-tagline" style="position:relative;z-index:1;">Excellence · Innovation · Future</div>
+          <div class="hero-card-line" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="label">About the school</span>
+        <h2 class="about-h2">An IB world school <span class="text-gradient">reimagined for tomorrow.</span></h2>
+      </div>
+      <div>
+        <div class="about-text">
+          <p><span style="color:#fff;font-weight:600;">Da Vinci School International</span> is an esteemed IB school based in Erbil, Iraq, guiding students through a rigorous international curriculum that blends timeless humanist values with the skills of the future.</p>
+          <p>Inspired by Leonardo's limitless curiosity, we cultivate thinkers, makers, scientists and artists — young minds who will shape Kurdistan and the world. DaVincieGPT is our next step: an AI companion designed for every learner under our roof.</p>
+        </div>
+        <div class="about-stats">
+          <div class="glass about-stat">
+            <div class="val">IB</div>
+            <div class="lbl">Authorised</div>
+          </div>
+          <div class="glass about-stat">
+            <div class="val">3+</div>
+            <div class="lbl">Languages</div>
+          </div>
+          <div class="glass about-stat">
+            <div class="val">ERB</div>
+            <div class="lbl">Erbil, Iraq</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section id="features" class="section">
+  <div class="container">
+    <div class="features-header">
+      <span class="label">Capabilities</span>
+      <h2 class="features-h2">Everything a Da Vinci student needs, <span class="text-gradient">in one chat.</span></h2>
+      <p class="features-sub">DaVincieGPT is tuned to the IB curriculum and to the way our students think.</p>
+    </div>
+    <div class="features-grid">
+
+      <!-- 0: large -->
+      <div class="glass feature-card large" style="border:1px solid var(--border);">
+        <div class="feature-hover-orb"></div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3>Homework Helper</h3>
+        <p>Get step-by-step explanations across math, science, literature and more — without giving you just the answer. DaVincieGPT teaches you to think, not just to copy.</p>
+      </div>
+
+      <!-- 1 -->
+      <div class="glass feature-card" style="border:1px solid var(--border);">
+        <div class="feature-hover-orb"></div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>Essay Review</h3>
+        <p>Structural feedback, tone polish, IB criteria check.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="glass feature-card" style="border:1px solid var(--border);">
+        <div class="feature-hover-orb"></div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3>Study Plans</h3>
+        <p>Personalised IB exam prep schedules that fit your life.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="glass feature-card" style="border:1px solid var(--border);">
+        <div class="feature-hover-orb"></div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h3>DP &amp; MYP Coach</h3>
+        <p>Command terms, TOK prompts, IA brainstorms — all covered.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="glass feature-card" style="border:1px solid var(--border);">
+        <div class="feature-hover-orb"></div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3>Multilingual</h3>
+        <p>Chats in English, Kurdish and Arabic, seamlessly.</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="glass feature-card" style="border:1px solid var(--border);">
+        <div class="feature-hover-orb"></div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+        </div>
+        <h3>Creative Spark</h3>
+        <p>Project ideas, science fair help and creative writing prompts.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SUBJECTS ===================== -->
+<section id="subjects" class="section" style="position:relative;overflow:hidden;">
+  <div class="grid-bg" style="position:absolute;inset:0;opacity:0.4;pointer-events:none;" aria-hidden="true"></div>
+  <div class="container" style="position:relative;">
+    <div class="subjects-header">
+      <div style="max-width:540px;">
+        <span class="label">Curriculum</span>
+        <h2 class="subjects-h2">Fluent in <span class="text-gradient">every subject</span> you take.</h2>
+      </div>
+      <p class="subjects-note">From IB Diploma core to electives, DaVincieGPT understands command terms, mark schemes and the Da Vinci teaching style.</p>
+    </div>
+    <div class="subjects-chips">
+      <span class="glass chip">Mathematics</span>
+      <span class="glass chip">Physics</span>
+      <span class="glass chip">Chemistry</span>
+      <span class="glass chip">Biology</span>
+      <span class="glass chip">English Literature</span>
+      <span class="glass chip">History</span>
+      <span class="glass chip">Economics</span>
+      <span class="glass chip">Computer Science</span>
+      <span class="glass chip">Theory of Knowledge</span>
+      <span class="glass chip">Visual Arts</span>
+      <span class="glass chip">Kurdish Studies</span>
+      <span class="glass chip">Arabic</span>
+      <span class="glass chip">French</span>
+      <span class="glass chip">Geography</span>
+      <span class="glass chip">Business Management</span>
+      <span class="glass chip">Environmental Systems</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CHAT ===================== -->
+<section id="chat">
+  <div class="container">
+    <div class="chat-header">
+      <span class="label" style="display:block;text-align:center;">DaVincieGPT</span>
+      <h2 class="chat-h2">Ask anything. <span class="text-gradient">Learn everything.</span></h2>
+      <p class="chat-sub">Your AI tutor is ready. Type your homework question, IB topic or essay draft below.</p>
+    </div>
+    <div class="chat-launch-panel glass" style="max-width:900px;margin:0 auto;border-radius:1.5rem;border:1px solid var(--border-em);box-shadow:0 0 60px rgba(16,185,129,0.15);padding:4rem 2.5rem;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%, rgba(16,185,129,0.12), transparent 65%);pointer-events:none;" aria-hidden="true"></div>
+
+      <!-- animated dV logo -->
+      <div style="position:relative;z-index:1;margin-bottom:2rem;">
+        <svg viewBox="0 0 64 64" width="80" height="80" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;" class="float">
+          <defs>
+            <linearGradient id="dvGc" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#10B981"/>
+              <stop offset="100%" stop-color="#059669"/>
+            </linearGradient>
+          </defs>
+          <polygon points="32,3 58,17 58,47 32,61 6,47 6,17" fill="url(#dvGc)" opacity="0.2" stroke="url(#dvGc)" stroke-width="1.5"/>
+          <circle cx="32" cy="32" r="17" fill="none" stroke="url(#dvGc)" stroke-width="1.2" opacity="0.55"/>
+          <circle cx="32" cy="32" r="10" fill="none" stroke="#10B981" stroke-width="0.6" opacity="0.35"/>
+          <text x="16" y="41" font-family="Outfit,sans-serif" font-weight="800" font-size="22" fill="#10B981">dV</text>
+        </svg>
+      </div>
+
+      <h3 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:1.75rem;margin-bottom:0.75rem;position:relative;z-index:1;">DaVincieGPT is ready for you</h3>
+      <p style="color:#a1a1aa;font-size:1rem;max-width:460px;margin:0 auto 2.5rem;line-height:1.7;position:relative;z-index:1;">
+        Click below to open your AI tutor in a new tab. Ask homework questions, get essay feedback, prepare for IB exams and more.
+      </p>
+
+      <!-- feature pills -->
+      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;margin-bottom:2.5rem;position:relative;z-index:1;">
+        <span style="padding:0.35rem 0.9rem;border-radius:999px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);font-size:0.78rem;color:var(--em-light);">📚 Homework help</span>
+        <span style="padding:0.35rem 0.9rem;border-radius:999px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);font-size:0.78rem;color:var(--em-light);">✍️ Essay review</span>
+        <span style="padding:0.35rem 0.9rem;border-radius:999px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);font-size:0.78rem;color:var(--em-light);">🎓 IB exam prep</span>
+        <span style="padding:0.35rem 0.9rem;border-radius:999px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);font-size:0.78rem;color:var(--em-light);">🌍 Multilingual</span>
+        <span style="padding:0.35rem 0.9rem;border-radius:999px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);font-size:0.78rem;color:var(--em-light);">💡 Study plans</span>
+      </div>
+
+      <a href="https://davinciegpt.zapier.app" target="_blank" rel="noreferrer"
+        class="btn-primary"
+        style="display:inline-flex;font-size:1.1rem;padding:1.1rem 2.5rem;position:relative;z-index:1;"
+        onmouseover="this.style.boxShadow='0 0 50px rgba(16,185,129,0.5)'"
+        onmouseout="this.style.boxShadow='none'">
+        Open DaVincieGPT <span class="arrow" style="font-size:1.2rem;">→</span>
+      </a>
+
+      <p style="margin-top:1.25rem;font-size:0.75rem;color:#52525b;position:relative;z-index:1;">
+        Opens in a new tab · No login required · Free for Da Vinci School students
+      </p>
+    </div>
+    <div class="chat-note" style="margin-top:1.5rem;">
+      <span class="dot"></span>
+      DaVincieGPT is live and ready · Available 24/7 for Da Vinci School students
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-tile">
+        <div class="stat-val">24/7</div>
+        <div class="stat-lbl">AI tutor availability</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-val">&lt;2s</div>
+        <div class="stat-lbl">Avg. response time</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-val">IB</div>
+        <div class="stat-lbl">Curriculum aligned</div>
+      </div>
+      <div class="stat-tile">
+        <div class="stat-val">∞</div>
+        <div class="stat-lbl">Curious questions welcome</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 64 64" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="dvGf" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#10B981"/>
+                <stop offset="100%" stop-color="#059669"/>
+              </linearGradient>
+            </defs>
+            <polygon points="32,3 58,17 58,47 32,61 6,47 6,17" fill="url(#dvGf)" opacity="0.2" stroke="url(#dvGf)" stroke-width="1.5"/>
+            <circle cx="32" cy="32" r="17" fill="none" stroke="url(#dvGf)" stroke-width="1.2" opacity="0.55"/>
+            <text x="16" y="41" font-family="Outfit,sans-serif" font-weight="800" font-size="22" fill="#10B981">dV</text>
+          </svg>
+          <div>
+            <div class="footer-brand-name">Da Vinci School</div>
+            <div class="footer-brand-sub">International · Erbil · Iraq</div>
+          </div>
+        </div>
+        <p class="footer-desc">Inspiring curious minds through IB education, classical values and modern technology. Home of DaVincieGPT.</p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">DaVincieGPT features</a></li>
+          <li><a href="#subjects">Subjects</a></li>
+          <li><a href="#chat">Launch chat</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-contact">
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:info@leodv.com">info@leodv.com</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <a href="https://leodv.com" target="_blank" rel="noreferrer">leodv.com</a>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Erbil, Kurdistan Region — Iraq</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="yr"></span> Da Vinci School International · All rights reserved.</span>
+      <span class="motto">Excellence · Innovation · Future</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 12) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  // Mobile toggle
+  const toggle = document.getElementById('mobileToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuIcon = document.getElementById('menuIcon');
+  let menuOpen = false;
+  toggle.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    menuIcon.innerHTML = menuOpen
+      ? '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+      : '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(l => {
+    l.addEventListener('click', () => {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+    });
+  });
+</script>
+</body>
+</html>
